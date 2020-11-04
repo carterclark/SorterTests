@@ -66,7 +66,6 @@ public class ReadVGFromFile {
 				date = new SimpleDateFormat("dd/MM/yyyy").parse(tokens[0]);
 				rating = Integer.parseInt(tokens[2]);
 			} catch (Exception e)	{
-				// do nothing
 			}
 			
 			// Store data in array
@@ -85,5 +84,26 @@ public class ReadVGFromFile {
 		// Return the data array
 		return arr;
 	}
+	
+	public static void main (String[] args)    {
+
+
+        VideoGame[] arrayToBeSorted = null;  // Will hold all data read from file, size unknown
+
+        try    {
+            // Read the file and return an array holding the data
+            //creating integer array
+            arrayToBeSorted = ReadVGFromFile.readFile ("protests.txt");
+        } catch (Exception e)    {
+            System.out.println("Something went wrong while reading the file\n"+e);
+        }
+        //PetSorter.quickSort (arrayToBeSorted,0,arrayToBeSorted.length-1);
+
+        // Report on the number of records read and print a few data items
+        System.out.println ("Length: " + arrayToBeSorted.length);
+        for (int i=0; i < 10; i++)
+            System.out.println(arrayToBeSorted[i]);
+    }
+
 	
 }

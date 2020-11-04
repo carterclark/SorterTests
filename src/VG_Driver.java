@@ -36,7 +36,7 @@ public static void main (String[] args)	{
 				end = System.currentTimeMillis();
 				System.out.println(end - start);
 				
-				for (int k=0; k < num-1; k++){
+				for (int k=0; k < num-1; k++){// test that each list is sorted correctly
 					assert(arrayToBeSorted[i].compareTo(arrayToBeSorted[i+1]) <= 0);
 				}
 			}

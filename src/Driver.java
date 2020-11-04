@@ -9,30 +9,51 @@
 public class Driver {
 	public static void main (String[] args)	{
 		
-//		assert false;
-		int data[] = null;
+
+		//total length 35632
 		
-		try	{
-			data = ReadFromFileClass.readFile ("protests.txt");
-		} catch (Exception e)	{
-			System.out.println("Something went wrong while reading the file\n"+e);
+		//tests
+		
+		// size
+		int n = 2500;
+		int num = n;
+		long start;
+		long end;
+		int[] arrayToBeSorted = null;  // Will hold all data read from file, size unknown
+		
+		//loop for all different tests with different length of num
+		for(int i=1; i<=10; i++) {
+			
+			System.out.println("\nlength of time for: " + num);
+			
+			//loop for tests of individual length num
+			for(int j=0; j<10; j++) {
+				
+				try	{
+					// Read the file and return an array holding the data
+					arrayToBeSorted = ReadFromFileClass.readFile ("protests.txt");
+				} catch (Exception e)	{
+					System.out.println("Something went wrong while reading the file\n"+e);
+				}
+				
+				start = System.currentTimeMillis();
+				//Sorter.quickSort(arrayToBeSorted, 0, num-1);
+				//Sorter.mergeSort(arrayToBeSorted, num);
+				Sorter.insertionSort(arrayToBeSorted,num);
+				end = System.currentTimeMillis();
+				System.out.println(end - start);
+				
+				
+				for (int k=0; k < num-1; k++){// test that each list is sorted correctly
+					assert(arrayToBeSorted[i] <= arrayToBeSorted[i+1]);
+				}
+			}
+			
+			num = num + n;
 		}
 		
-		// Decide how many items to sort
-		int numToSort = 25000;  // All 35,000+ causes stack overflow on my computer
-		long begin = System.currentTimeMillis(); 	// start time	
-		// quickSort(integer array, starting index, ending index)
-		Sorter.quickSort (data, 0, numToSort-1);
-		long end = System.currentTimeMillis(); 		// end time
-		// Display elapsed time
-		System.out.println("Size: " + numToSort + "\tTime in ms: " + (end-begin));	
 
-		// Make sure the list is correctly sorted
-		// You must enable asserts for this test to work.  
-		// See D2L - Content | Programming Assignments | Program 1 Stuff and Assert | Asserts
-		for (int i=0; i < numToSort-1; i++)	{			
-			// System.out.println(data[i]);
-			assert (data[i] <= data[i+1]);
-		}	
+		
+//		System.out.println("length of time: " + (end - start));
 	}
 }
